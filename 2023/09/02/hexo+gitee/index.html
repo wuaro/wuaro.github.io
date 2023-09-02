@@ -34,8 +34,11 @@
 <meta property="og:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/image-20230902164014663.png">
 <meta property="og:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/image-20230902164524585.png">
 <meta property="og:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/image-20230902165021546.png">
+<meta property="og:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/image-20230902174237139.png">
+<meta property="og:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/image-20230902183816716.png">
+<meta property="og:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE2023-09-02-184144.jpg">
 <meta property="article:published_time" content="2023-09-02T04:05:23.060Z">
-<meta property="article:modified_time" content="2023-09-02T08:58:10.458Z">
+<meta property="article:modified_time" content="2023-09-02T10:49:36.621Z">
 <meta property="article:author" content="WHR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/image-20230902103728706.png">
@@ -231,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.9k 字
         
       </span>
     
@@ -242,7 +245,7 @@
         
         
         
-          12 分钟
+          16 分钟
         
       </span>
     
@@ -370,10 +373,28 @@
 <p>实名认证成功后就会出现博客地址</p>
 <p><img src="/2023/09/02/hexo+gitee/image-20230902165021546.png" srcset="/img/loading.gif" lazyload alt="image-20230902165021546"></p>
 </li>
-<li><p>勾选强制使用HTTPS，点击启动 或 更新，打开网址即可看到初始的hexo博客界面</p>
+<li><p>勾选强制使用HTTPS，点击启动 或 更新，打开网址即可看到初始的hexo博客界面，类似下图：</p>
+<p><img src="/2023/09/02/hexo+gitee/image-20230902174237139.png" srcset="/img/loading.gif" lazyload alt="image-20230902174237139"></p>
 </li>
 </ol>
-<h1 id="三-其他"><a href="#三-其他" class="headerlink" title="三.其他"></a>三.其他</h1><h2 id="1-更换主题"><a href="#1-更换主题" class="headerlink" title="1.更换主题"></a>1.更换主题</h2><h2 id="2-博客更新"><a href="#2-博客更新" class="headerlink" title="2. 博客更新"></a>2. 博客更新</h2><p>博客图片怎么显示？</p>
+<h1 id="三-更换主题（Fluid）"><a href="#三-更换主题（Fluid）" class="headerlink" title="三.更换主题（Fluid）"></a>三.更换主题（Fluid）</h1><p>hexo官方主题网站：<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
+<p>这里使用的是比较火的简约主题Fluid：<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">https://hexo.fluid-dev.com/docs/</a></p>
+<h2 id="1-获取最新版本"><a href="#1-获取最新版本" class="headerlink" title="1.获取最新版本"></a>1.获取最新版本</h2><p>获取最新的release版本：<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases">https://github.com/fluid-dev/hexo-theme-fluid/releases</a></p>
+<p>下载，解压到 themes 目录，并将解压出的文件夹重命名为：fluid</p>
+<p><img src="/2023/09/02/hexo+gitee/image-20230902183816716.png" srcset="/img/loading.gif" lazyload alt="image-20230902183816716"></p>
+<h2 id="2-修改设置"><a href="#2-修改设置" class="headerlink" title="2. 修改设置"></a>2. 修改设置</h2><p>在根目录下的_config.yml，做以下两个修改（别忘了冒号后有空格）：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span>  <br><br><span class="hljs-attr">language:</span> <span class="hljs-string">zh-CN</span>  <br></code></pre></td></tr></table></figure>
+
+<h2 id="3-创建“关于”页"><a href="#3-创建“关于”页" class="headerlink" title="3. 创建“关于”页"></a>3. 创建“关于”页</h2><p>Fluid主题中的“关于”页面是需要单独创建的</p>
+<p><img src="/2023/09/02/hexo+gitee/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE2023-09-02-184144.jpg" srcset="/img/loading.gif" lazyload></p>
+<ol>
+<li><p>在根目录下打开cmd，输入：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> about<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>修改 &#x2F;source&#x2F;about&#x2F;index.md，添加 layout 属性，如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 标题<br><span class="hljs-section">layout: about</span><br><span class="hljs-section">---</span><br><br>这里写关于页的正文，支持 Markdown, HTML<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p>博客图片怎么显示？</p>
 <p>hexo+gitee搭建个人博客（详细）</p>
 <p>hexo+gitee搭建个人博客（详细）</p>
 <p>hexo+gitee搭建个人博客（详细）</p>
