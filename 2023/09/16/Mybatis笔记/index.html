@@ -16,7 +16,7 @@
   <meta name="author" content="五花肉">
   <meta name="keywords" content="">
   
-    <meta name="description" content="五花肉的个人博客">
+    <meta name="description" content="第一个Mybatis程序 resources目录： 放在这个目录当中的，一般都是资源文件，配置文件 直接放到resources目录下的资源，等于放到了类的路径下  开发步骤  打包方式jar 123&amp;lt;!--打包方式jar--&amp;gt;&amp;lt;!--和dependencies标签同级--&amp;gt;    &amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;  引入依赖  m">
   
   
   
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          3.2k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          1 分钟
+          27 分钟
         
       </span>
     
@@ -331,7 +331,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：3 小时前
+                    本文最后更新于：3 分钟前
                   
                 
               </p>
@@ -339,7 +339,88 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="第一个Mybatis程序"><a href="#第一个Mybatis程序" class="headerlink" title="第一个Mybatis程序"></a>第一个Mybatis程序</h1><ol>
+<li><p>resources目录：</p>
+<p>放在这个目录当中的，一般都是资源文件，配置文件</p>
+<p>直接放到resources目录下的资源，等于放到了类的路径下</p>
+</li>
+<li><p>开发步骤</p>
+<ol>
+<li><p>打包方式jar</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--打包方式jar--&gt;</span><br><span class="hljs-comment">&lt;!--和dependencies标签同级--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">packaging</span>&gt;</span>jar<span class="hljs-tag">&lt;/<span class="hljs-name">packaging</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>引入依赖</p>
+<ol>
+<li>mybatis依赖</li>
+<li>mysql驱动依赖</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--mybatis依赖--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.mybatis<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mybatis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.5.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br>        <span class="hljs-comment">&lt;!--mysql驱动依赖--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>8.0.30<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写mybatis核心配置文件：mybatis-config.xml（内容可以从mybatis中文网中复制）</p>
+<p>通过这个文件可以创建SqlSessionFactory对象</p>
+<p>注意：</p>
+<ul>
+<li><p>这个文件名不是必须叫做mybatis-config.xml，可以用其他的名字，只是大家都采用这个名字</p>
+</li>
+<li><p>这个文件存放的位置也不是固定的，可以随意，但一般情况下，会放到resources目录下（根目录下）</p>
+</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">configuration</span></span><br><span class="hljs-meta">        <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;driver&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;url&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;username&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;password&#125;&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;org/mybatis/example/BlogMapper.xml&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写XxxxMapper.xml文件</p>
+<p>在这个配置文件中编写SQL语句</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">mapper</span></span><br><span class="hljs-meta">        <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;这个先不写&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--增--&gt;</span><br>    <span class="hljs-comment">&lt;!--id是这条SQL语句的唯一标示，这个id就代表了这条SQL语句--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertCar&quot;</span>&gt;</span><br>        insert into t_car(id,car,num,brand,guide_price,produce_time,car_type)<br>        values(null,&#x27;1003&#x27;,&#x27;丰田霸道&#x27;,30.0,&#x27;2000-0-11&#x27;,&#x27;燃油车&#x27;)<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mapper</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这个文件名也不是固定的，文件的位置也不是固定的</p>
+</li>
+<li><p>在mybatis-config.xml文件中指定XxxxMapper.xml文件的路径</p>
+<p>注意：resourse属性会自动从类的根路径下（resourses目录下）开始查找</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-comment">&lt;!--指定XxxxMapper.xml文件的路径--&gt;</span><br>    <span class="hljs-comment">&lt;!--resourse属性会自动从类的根路径下（resourses目录下）开始查找资源--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;CarMapper.xml&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>编写Mybatis程序（使用mybatis类库，编写mybatis程序，连接数据库，做增删改查）</p>
+<ul>
+<li><p>在mybatis当中，负责执行SQL语句的那个对象叫：SqlSession</p>
+<p>是Java程序和数据库之间的依次会话</p>
+</li>
+<li><p>要想获取SQLSession对象，需要先获取一个对象：SqlSessionFactory</p>
+<p>通过SqlSessionFactory工厂来生产SQLSession对象</p>
+</li>
+<li><p>要想获取SQLSessionFactory对象，需要先获取一个对象：SqlSessionFactoryBuilder</p>
+<p>通过SqlSessionFactoryBuilder的build方法来获取一个</p>
+<p>SQLSessionFactory对象</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>从XML中构建SQLSessionFactory</p>
+<p>通过官方的这句话，能想到：</p>
+<ul>
+<li><p>在Mybatis中一定有一个很重要的对象，这个对象是：SqlSessionFactory</p>
+</li>
+<li><p>SQLSessionFactory对象的创建需要XML</p>
+</li>
+</ul>
+<p>XML是什么：</p>
+<p>​	他是一个配置文件</p>
+</li>
+<li><p>Mybatis中有两个主要的配置文件：</p>
+<ol>
+<li><p>mybatis-config.xml， 这是核心配置文件，主要配置连接数据库的信息等…（一般只有一个）</p>
+</li>
+<li><p>XxxxMapper.xml，这个文件是专门用来编写SQL语句的配置文件（一般一个数据库表对应一个配置文件）</p>
+<p>比如：</p>
+<ul>
+<li><p>t_user表，一般会对应一个UserMapper.xml</p>
+</li>
+<li><p>t_student表，一般会对应一个StudentMapper.xml</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+
                 
               </div>
             
@@ -396,7 +477,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年9月16日</div>
+          <div>2023年10月5日</div>
         </div>
       
       
