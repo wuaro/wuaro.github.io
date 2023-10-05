@@ -16,7 +16,7 @@
   <meta name="author" content="五花肉">
   <meta name="keywords" content="">
   
-    <meta name="description" content="五花肉的个人博客">
+    <meta name="description" content="哈希两数之和（简单）题目：  方法一：利用哈希表分析：哈希表可以在O(1)时间复杂度下查找元素，于是想到此方法 时间复杂度：O(n) 空间复杂度：O(n)  遍历数组  对于每一个nums[i]，如果哈希表中没有值为target-nums[i]的元素，则当前情况无法得到答案，那就将nums[i]存入哈希表，并继续遍历  如果nums[i]能在哈希表中找到值为target-nums[i]的元素凑成一">
   
   
   
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-16 18:33" pubdate>
-          2023年9月16日 晚上
+        <time datetime="2023-10-05 16:15" pubdate>
+          2023年10月5日 下午
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          1.7k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          1 分钟
+          15 分钟
         
       </span>
     
@@ -301,7 +301,7 @@
     
       
       
-        <a href="/2023/09/16/LeetCode%E7%83%AD%E9%A2%98100%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" title="LeetCode热题100刷题记录"
+        <a href="/2023/10/05/LeetCode%E7%83%AD%E9%A2%98100%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" title="LeetCode热题100刷题记录"
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">LeetCode热题100刷题记录</span>
@@ -340,7 +340,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：19 天前
+                    本文最后更新于：1 分钟前
                   
                 
               </p>
@@ -348,7 +348,43 @@
             
               <div class="markdown-body">
                 
-                
+                <h1 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h1><h2 id="两数之和（简单）"><a href="#两数之和（简单）" class="headerlink" title="两数之和（简单）"></a>两数之和（简单）</h2><p>题目：</p>
+<p><img src="/2023/10/05/LeetCode%E7%83%AD%E9%A2%98100%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C(1).png" srcset="/img/loading.gif" lazyload alt="两数之和(1)"></p>
+<h3 id="方法一：利用哈希表"><a href="#方法一：利用哈希表" class="headerlink" title="方法一：利用哈希表"></a>方法一：利用哈希表</h3><p>分析：哈希表可以在O(1)时间复杂度下查找元素，于是想到此方法</p>
+<p>时间复杂度：O(n)</p>
+<p>空间复杂度：O(n)</p>
+<ol>
+<li><p>遍历数组</p>
+</li>
+<li><p>对于每一个nums[i]，如果哈希表中没有值为target-nums[i]的元素，则当前情况无法得到答案，那就将nums[i]存入哈希表，并继续遍历</p>
+</li>
+<li><p>如果nums[i]能在哈希表中找到值为target-nums[i]的元素凑成一对，则找到答案，new一个数组装入两个值，return即可</p>
+</li>
+<li><p>这里哈希表的长度设置为nums.length-1即可</p>
+<p>因为题目规定：在数组全部遍历完成之前，一定能找到答案。所以不存在数组nums中所有元素都存入哈希表的情况，最多也就是存入nums.length-1个元素</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">l</span> <span class="hljs-operator">=</span> nums.length;<br>        <span class="hljs-comment">//这里设置hashmap容量是为了防止hashmap不断自动扩容，浪费时间。容量写l-1就行（因为一定会找到一对！）</span><br>        HashMap&lt;Integer, Integer&gt; hm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Integer, Integer&gt;(l-<span class="hljs-number">1</span>);<br>        hm.put(nums[<span class="hljs-number">0</span>],<span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; nums.length; i++) &#123;<br>            <span class="hljs-comment">//如果hashmap中有与之匹配的值，则直接返回对应的数组</span><br>            <span class="hljs-keyword">if</span>(hm.containsKey(target-nums[i])) <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;i,hm.get(target-nums[i])&#125; ;<br>            hm.put(nums[i],i);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[]&#123;<span class="hljs-number">0</span>,<span class="hljs-number">0</span>&#125;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="方法二：利用双指针"><a href="#方法二：利用双指针" class="headerlink" title="方法二：利用双指针"></a>方法二：利用双指针</h3><p>分析：哈希表是拿空间换时间，如果是想要空闲复杂度为O(1)的话，就可以用双指针</p>
+<p>时间复杂度：O(nlogn)</p>
+<p>空间复杂度：O(1)</p>
+<ol>
+<li><p>先将nums数组升序排列</p>
+</li>
+<li><p>定义两个指针i、j，起初分别指向 一头一尾（即分别指向最小、最大的数）</p>
+</li>
+<li><p>如果 两数之和大于target ,则应将大数减小，即j–</p>
+<p>如果 两数之和小于target ,则应将大数减小，即i++</p>
+</li>
+<li><p>如此反复，直到找到答案为止…</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">        先排序，再双指针</span><br><span class="hljs-comment">        起初一头一尾</span><br><span class="hljs-comment">            如果两数之和&gt;target,则应将大数减小，即j--</span><br><span class="hljs-comment">            如果两数之和&lt;target,则应将大数减小，即i++</span><br><span class="hljs-comment">            直到找到为止</span><br><span class="hljs-comment">     */</span><br>    <br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span>[] twoSum(<span class="hljs-type">int</span>[] nums, <span class="hljs-type">int</span> target) &#123;<br>        <span class="hljs-type">int</span>[] n = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[nums.length];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; nums.length; i++) &#123;<br>            n[i] = nums[i];<br>        &#125;<br>        Arrays.sort(nums);<br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> nums.length-<span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">while</span> (i &lt; j)&#123;<br>            <span class="hljs-keyword">if</span> (nums[i]+nums[j]&gt;target)&#123;<br>                j--;<br>            &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nums[i]+nums[j]&lt;target) &#123;<br>                i++;<br>            &#125;<span class="hljs-keyword">else</span> &#123;<br>                i = nums[i];<br>                j = nums[j];<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-type">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>];<br>        <span class="hljs-comment">//由于排序之后的数组下标打乱了，所以需要在原数组中找到对应下标</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; k &lt; n.length; k++) &#123;<br>            <span class="hljs-keyword">if</span>(i == n[k]) &#123;<br>                result[<span class="hljs-number">0</span>] = k; <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">k</span> <span class="hljs-operator">=</span> n.length-<span class="hljs-number">1</span>; k &gt; <span class="hljs-number">0</span>; k--) &#123;<br>            <span class="hljs-keyword">if</span> (j == n[k]) &#123;<br>                result[<span class="hljs-number">1</span>] = k; <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="字母异位词分组"><a href="#字母异位词分组" class="headerlink" title="字母异位词分组"></a>字母异位词分组</h2><h2 id="最长连续序列"><a href="#最长连续序列" class="headerlink" title="最长连续序列"></a>最长连续序列</h2>
                 
               </div>
             
@@ -387,7 +423,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>LeetCode热题100刷题记录</div>
-      <div>https://wu_hua_rou.gitee.io/2023/09/16/LeetCode热题100刷题记录/</div>
+      <div>https://wu_hua_rou.gitee.io/2023/10/05/LeetCode热题100刷题记录/</div>
     </div>
     <div class="license-meta">
       
@@ -399,13 +435,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月16日</div>
+          <div>2023年10月5日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年9月16日</div>
+          <div>2023年10月5日</div>
         </div>
       
       
@@ -436,18 +472,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/16/Mybatis%E7%AC%94%E8%AE%B0/" title="Mybatis笔记">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mybatis笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/16/%E9%AB%98%E9%A2%91SQL50%E9%A2%98%EF%BC%88%E5%9F%BA%E7%A1%80%E7%89%88%EF%BC%89%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" title="高频SQL50题（基础版）刷题 记录">
-                        <span class="hidden-mobile">高频SQL50题（基础版）刷题 记录</span>
+                      <a href="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/" title="Mybatis笔记">
+                        <span class="hidden-mobile">Mybatis笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
