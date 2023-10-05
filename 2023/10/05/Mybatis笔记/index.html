@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k 字
+          3.8k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          27 分钟
+          32 分钟
         
       </span>
     
@@ -331,7 +331,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：1 小时前
+                    本文最后更新于：3 分钟前
                   
                 
               </p>
@@ -411,13 +411,40 @@
 <li><p>XxxxMapper.xml，这个文件是专门用来编写SQL语句的配置文件（一般一个数据库表对应一个配置文件）</p>
 <p>比如：</p>
 <ul>
-<li><p>t_user表，一般会对应一个UserMapper.xml</p>
-</li>
-<li><p>t_student表，一般会对应一个StudentMapper.xml</p>
-</li>
+<li>t_user表，一般会对应一个UserMapper.xml</li>
 </ul>
 </li>
 </ol>
+</li>
+</ol>
+<ul>
+<li>t_student表，一般会对应一个StudentMapper.xml</li>
+</ul>
+<ol start="5">
+<li><p>关于第一个程序的小细节</p>
+<ul>
+<li><p>SQL语句结尾可以不加 “;”</p>
+</li>
+<li><p>关于Resources.getResourceAsStream()</p>
+<p>凡是遇到resource这个单词，大部分情况下，这种加载资源的方式都是从类的根路径下开始查找</p>
+</li>
+<li><p>Resources.getResourceAsStream()也可以通过new一个InputStream输入流来代替，但是只能使用绝对路径，项目的移植性不好</p>
+</li>
+<li><p>mybatis核心配置文件的名字不一定是mybatis-config.xml，存放的路径也可以随意，但是为了项目的健壮性，移植性，最好还是放在类的根目录下面</p>
+</li>
+<li><p>InputStream is &#x3D; ClassLoader.getSystemClassLoader().getResourceAsStream(“mybatis-config.xml”);</p>
+<p>使用系统类加载器也可以代替Resources.getResourceAsStream()，也是可以使用相对路径</p>
+<p><strong>其实mybatis的Resources.getResourceAsStream()方法底层也是调用的这个ClassLoader的方法</strong></p>
+</li>
+<li><p>CarMapper.xml文件的 名字和路径 也是不固定的</p>
+</li>
+<li><p>mybatis-config.xml中的&lt;mapper&gt;标签</p>
+<ul>
+<li>resource属性：从类路径下加载资源</li>
+<li>url属性：使用绝对路径加载资源（语法格式“file:&#x2F;&#x2F;&#x2F;绝对路径”）</li>
+</ul>
+</li>
+</ul>
 </li>
 </ol>
 
