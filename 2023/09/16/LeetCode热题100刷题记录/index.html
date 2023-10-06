@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          4.7k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          15 分钟
+          39 分钟
         
       </span>
     
@@ -349,7 +349,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：5 小时前
+                    本文最后更新于：2 分钟前
                   
                 
               </p>
@@ -393,7 +393,31 @@
 
 
 
-<h2 id="字母异位词分组"><a href="#字母异位词分组" class="headerlink" title="字母异位词分组"></a>字母异位词分组</h2><h2 id="最长连续序列"><a href="#最长连续序列" class="headerlink" title="最长连续序列"></a>最长连续序列</h2>
+<h2 id="字母异位词分组"><a href="#字母异位词分组" class="headerlink" title="字母异位词分组"></a>字母异位词分组</h2><p>题目：</p>
+<p><img src="/2023/09/16/LeetCode%E7%83%AD%E9%A2%98100%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/image-20231006165421137.png" srcset="/img/loading.gif" lazyload alt="image-20231006165421137"></p>
+<h3 id="方法一：哈希表-字符数组排序"><a href="#方法一：哈希表-字符数组排序" class="headerlink" title="方法一：哈希表+字符数组排序"></a>方法一：哈希表+字符数组排序</h3><p>分析：字母异位词之间的区别在于字母的排列顺序不同，那么通过排序即可让它们相同</p>
+<p>时间复杂度：O(n*klogk)   (klogk是字符串排序的时间复杂度)</p>
+<p>空间复杂度：O(nk)	(k是字符串平均长度)</p>
+<ol>
+<li>定义一个哈希表，key：排序之后的字符串，value：和key对应的所有字母异位词的列表</li>
+<li>遍历每个元素，将String转化为char[]来排序，再通过ValueOf(s)方法转化回String</li>
+<li>将排序后的String和哈希表中的所有key对比<ol>
+<li>如果存在，则将原String加到对应的list异位词列表中</li>
+<li>如果不存在，说明是新的异位词，则创建新的list异位词列表，并和该String一起存入哈希表</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">groupAnagrams</span><span class="hljs-params">(String[] strs)</span> &#123;<br>        HashMap&lt;String, List&lt;String&gt;&gt; hm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, List&lt;String&gt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; strs.length; i++) &#123;<br>            <span class="hljs-type">char</span>[] s = strs[i].toCharArray();       <span class="hljs-comment">//字符串转换为char[]（方便后面排序）</span><br>            Arrays.sort(s);                         <span class="hljs-comment">//排序（异位词排序之后就一样了）</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> String.valueOf(s);          <span class="hljs-comment">//转化回字符串，来判断是否和HashMap中字符串相同</span><br>            <span class="hljs-keyword">if</span> (hm.containsKey(s1)) &#123;                <span class="hljs-comment">//每次判断，如果有一样的，就放入排序之前的字符串：strs[i]</span><br>                hm.get(s1).add(strs[i]);<br>                hm.put(s1, hm.get(s1));<br>            &#125; <span class="hljs-keyword">else</span> &#123;                                   <span class="hljs-comment">//如果是新的异位词，则创建新的list&lt;String&gt;加入HashMap</span><br>                List&lt;String&gt; slist = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();   <span class="hljs-comment">//HashMap中的value是一个String的list</span><br>                slist.add(strs[i]);<br>                hm.put(s1, slist);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">//取出HashMap中所有的value，也就是所有的List&lt;String&gt;,放入一个大的Lits&lt;List&lt;String&gt;&gt;</span><br>        ArrayList&lt;List&lt;String&gt;&gt; lists = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;List&lt;String&gt;&gt;();<br>        Collection&lt;List&lt;String&gt;&gt; values = hm.values();<br>        <span class="hljs-keyword">for</span> (List&lt;String&gt; value : values) &#123;<br>            lists.add(value);<br>        &#125;<br>        <span class="hljs-keyword">return</span> lists;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>做一些代码瘦身：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">groupAnagrams</span><span class="hljs-params">(String[] strs)</span> &#123;<br>        HashMap&lt;String, List&lt;String&gt;&gt; slhm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, List&lt;String&gt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s:strs)&#123;<br>            <span class="hljs-type">char</span>[] charArray = s.toCharArray();<br>            Arrays.sort(charArray);<br>            <span class="hljs-type">String</span> <span class="hljs-variable">s1</span> <span class="hljs-operator">=</span> String.valueOf(charArray);      <span class="hljs-comment">//注意这里不能用toString()，那样只会转化成char[]的地址</span><br>            <span class="hljs-keyword">if</span> (!slhm.containsKey(s1)) slhm.put(s1,<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;());<br><br>            <span class="hljs-comment">//直接加入就可以，不必再使用一次slhm.put()，主要是 slhm.get(s1).add(s)返回的是Boolean</span><br>            <span class="hljs-comment">//下面这句是被复用，无论需不需要再HashMap中新建List，都需要往里面添加元素（妙极！）</span><br>            slhm.get(s1).add(s);<br>            <span class="hljs-comment">//slhm.put(s1,slhm.get(s1).add(s));</span><br>        &#125;<br>        <span class="hljs-comment">//slhm.values()本来是返回Collection对象的，但是可以直接放入ArrayList中进行转化</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(slhm.values());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="方法二：字符计数法"><a href="#方法二：字符计数法" class="headerlink" title="方法二：字符计数法"></a>方法二：字符计数法</h3><p>分析：如果想省去排序的时间，可以用空间换时间，<strong>用一个长26的数组来记录该字符串中26个字母分别出现的次数</strong>，并将该数组转化成字符串的形式记录（”|0|1|2|0|2|……”）（因为字符串方便比较）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> List&lt;List&lt;String&gt;&gt; <span class="hljs-title function_">groupAnagrams</span><span class="hljs-params">(String[] strs)</span> &#123;<br>        HashMap&lt;String, ArrayList&lt;String&gt;&gt; slhm = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String, ArrayList&lt;String&gt;&gt;();<br>        <span class="hljs-keyword">for</span> (String s:strs)&#123;<br>            <span class="hljs-type">int</span>[] charsnum = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">26</span>];<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; s.length(); i++) &#123;<br>                charsnum[s.charAt(i)-<span class="hljs-string">&#x27;a&#x27;</span>]++;           <span class="hljs-comment">//在数组对应位置+1</span><br>            &#125;<br>            <br>            <span class="hljs-comment">//String s1 = new String();</span><br>            <span class="hljs-type">StringBuilder</span> <span class="hljs-variable">sb</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>();<br>            <span class="hljs-comment">//最终形成的String长这样：|0|1|2|0|2|......（以此类推），用来表示单词中26个字母出现的次数，从而判断异位词</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> c:charsnum) &#123;                      <br>                sb.append(<span class="hljs-string">&#x27;|&#x27;</span>);<br>                sb.append(c);<br>            &#125;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">s2</span> <span class="hljs-operator">=</span> sb.toString();<br>            <span class="hljs-keyword">if</span> (!slhm.containsKey(s2)) slhm.put(s2,<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;());<br>            slhm.get(s2).add(s);<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;(slhm.values());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="最长连续序列"><a href="#最长连续序列" class="headerlink" title="最长连续序列"></a>最长连续序列</h2>
                 
               </div>
             
@@ -450,7 +474,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月5日</div>
+          <div>2023年10月6日</div>
         </div>
       
       
