@@ -16,7 +16,7 @@
   <meta name="author" content="五花肉">
   <meta name="keywords" content="">
   
-    <meta name="description" content="第一个Mybatis程序 resources目录： 放在这个目录当中的，一般都是资源文件，配置文件 直接放到resources目录下的资源，等于放到了类的路径下  开发步骤  打包方式jar 123&amp;lt;!--打包方式jar--&amp;gt;&amp;lt;!--和dependencies标签同级--&amp;gt;    &amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;  引入依赖  m">
+    <meta name="description" content="第一个Mybatis程序 resources目录： 放在这个目录当中的，一般都是资源文件，配置文件直接放在resources目录下的资源，等于放到类的根目录下   开发步骤  打包方式jar 123&amp;lt;!--打包方式jar--&amp;gt;&amp;lt;!--和dependencies标签同级--&amp;gt;    &amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;  引入依赖  m">
   
   
   
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-05 16:08" pubdate>
-          2023年10月5日 下午
+        <time datetime="2023-10-05 18:33" pubdate>
+          2023年10月5日 晚上
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.8k 字
+          5.2k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          32 分钟
+          44 分钟
         
       </span>
     
@@ -331,7 +331,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：1 天前
+                    本文最后更新于：1 分钟前
                   
                 
               </p>
@@ -341,8 +341,7 @@
                 
                 <h1 id="第一个Mybatis程序"><a href="#第一个Mybatis程序" class="headerlink" title="第一个Mybatis程序"></a>第一个Mybatis程序</h1><ol>
 <li><p>resources目录：</p>
-<p>放在这个目录当中的，一般都是资源文件，配置文件</p>
-<p>直接放到resources目录下的资源，等于放到了类的路径下</p>
+<p>放在这个目录当中的，一般都是资源文件，配置文件<br>直接放在resources目录下的资源，等于放到类的根目录下 </p>
 </li>
 <li><p>开发步骤</p>
 <ol>
@@ -412,15 +411,11 @@
 <p>比如：</p>
 <ul>
 <li>t_user表，一般会对应一个UserMapper.xml</li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<ul>
 <li>t_student表，一般会对应一个StudentMapper.xml</li>
 </ul>
-<ol start="5">
+</li>
+</ol>
+</li>
 <li><p>关于第一个程序的小细节</p>
 <ul>
 <li><p>SQL语句结尾可以不加 “;”</p>
@@ -438,7 +433,7 @@
 </li>
 <li><p>CarMapper.xml文件的 名字和路径 也是不固定的</p>
 </li>
-<li><p>mybatis-config.xml中的&lt;mapper&gt;标签</p>
+<li><p>mybatis-config.xml中的<mapper>标签</mapper></p>
 <ul>
 <li>resource属性：从类路径下加载资源</li>
 <li>url属性：使用绝对路径加载资源（语法格式“file:&#x2F;&#x2F;&#x2F;绝对路径”）</li>
@@ -446,6 +441,60 @@
 </li>
 </ul>
 </li>
+<li><p>关于mybatis的事务管理机制（深度剖析）</p>
+<ul>
+<li><p>在mybatis-config,xml文件中，可以通过以下的配置进行mybatis的事务管理</p>
+<p>&lt;transactionManager  type&#x3D;”JDBC”&#x2F;&gt;</p>
+</li>
+<li><p>type属性的值包括两个(不区分大小写)：</p>
+<ul>
+<li>JDBC</li>
+<li>MANAGED（managed）</li>
+</ul>
+</li>
+<li><p>在mybatis中提供了两种事务管理机制：</p>
+<ol>
+<li><p>JDBC事务管理机制</p>
+<ul>
+<li><p>表示mybatis框架自己管理事务，自己采用原生的JDBC代码去管理任务</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">conn.setAutoConnit(<span class="hljs-literal">false</span>);	开启事务<br>...业务处理...<br>conn.commit(); 手动提交事务<br></code></pre></td></tr></table></figure>
+
+<p>使用JDBC事务管理器的话，底层创建的事务管理器对象是：JdbcTransaction对象</p>
+</li>
+</ul>
+</li>
+<li><p>managed事务管理机制</p>
+<ul>
+<li><p>mybatis不在负责事务管理了，事务管理交给其他容器来做，比如Spring</p>
+</li>
+<li><p>如果当前只有mybatis的情况下，如果配置为MANAGED，则事务管理这一块实际上没人负责</p>
+<p>也就是意味着<strong>事务压根没开启</strong></p>
+</li>
+</ul>
+</li>
+<li><p><strong>重点：只要autoCommit是true，就表示没有开启事务</strong></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>第一个完整的mybatis程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBatisCompleteTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">SqlSessionFactoryBuilder</span> <span class="hljs-variable">sqlSessionFactoryBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SqlSessionFactoryBuilder</span>();<br>            <span class="hljs-type">SqlSessionFactory</span> <span class="hljs-variable">sqlSessionFactory</span> <span class="hljs-operator">=</span> sqlSessionFactoryBuilder.build(Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>));<br>            <span class="hljs-comment">// 开启会话（底层会开启事务）</span><br>            sqlSession = sqlSessionFactory.openSession();<br>            <span class="hljs-comment">// 执行SQL语句，处理相关业务</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.insert(<span class="hljs-string">&quot;insertCar&quot;</span>);<br>            System.out.println(count);<br>            <span class="hljs-comment">// 执行到这里，没有发生任何异常，提交事务。终止事务。</span><br>            sqlSession.commit();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-comment">// 最好回滚事务</span><br>            <span class="hljs-keyword">if</span> (sqlSession != <span class="hljs-literal">null</span>) &#123;<br>                sqlSession.rollback();<br>            &#125;<br>            e.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-comment">// 关闭会话（释放资源）</span><br>            <span class="hljs-keyword">if</span> (sqlSession != <span class="hljs-literal">null</span>) &#123;<br>                sqlSession.close();<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="关于junit测试工具"><a href="#关于junit测试工具" class="headerlink" title="关于junit测试工具"></a>关于junit测试工具</h1><p>关于测试的一些规范：</p>
+<ol>
+<li><p>测试类名字规范：要测试的类名+Test（如：MathServiceTest）</p>
+<p>测试方法名字规范：test+要测试的方法名（如：testSum）</p>
+</li>
+<li><p>一般是一个业务方法对应一个测试方法</p>
+</li>
+</ol>
+<p>@Test这个注解很重要</p>
+<p>只要被这个注解标注的方法就是一个测试方法</p>
+<p>单元测试中有两个重要概念：</p>
+<ol>
+<li>实际值：被测试的业务方法真正的执行结果</li>
+<li>期望值：期望的执行结果</li>
 </ol>
 
                 
@@ -504,7 +553,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月5日</div>
+          <div>2023年10月8日</div>
         </div>
       
       
