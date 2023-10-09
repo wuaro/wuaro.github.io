@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.8k 字
+          10k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          74 分钟
+          86 分钟
         
       </span>
     
@@ -559,7 +559,35 @@
 <p>拥有工具类之后，测试方法也变得简洁了：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testInsertCarByUtil</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.insert(<span class="hljs-string">&quot;insertCar&quot;</span>);<br>	System.out.println(count);<br>	sqlSession.commit();<br>	sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure>
 
+<h1 id="Mybatis的增删改查"><a href="#Mybatis的增删改查" class="headerlink" title="Mybatis的增删改查"></a>Mybatis的增删改查</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p>值 显然是写死到配置文件中的。<br>这个在实际开发中是不存在的。<br>一定是前端的form表单提交过来数据。然后将值传给sql语句。</p>
+<p>实际编写insert时，不可能把insert语句中的参数写死在配置文件中，这是不可能的。</p>
+<p>一定是前端的form表单提交过来数据。用一个“东西”来装所有的参数，然后将值传给sql语句。</p>
+<p>这个“东西”可以是Map也可以是POJO类</p>
+<p><strong>JDBC中是怎么实现的？</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">sql</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;insert into t_car(id,car_num,brand,guide_price,produce_time,car_type) values(null,?,?,?,?,?)&quot;</span>;<br>ps.setString(<span class="hljs-number">1</span>, xxx);<br>ps.setString(<span class="hljs-number">2</span>, yyy);<br>....<br></code></pre></td></tr></table></figure>
 
+<ul>
+<li><p>jdbc：用 “?” 来作为占位符</p>
+</li>
+<li><p>mybatis：用”#{xxxxx}”来作为占位符</p>
+</li>
+</ul>
+<h3 id="用Map集合传参"><a href="#用Map集合传参" class="headerlink" title="用Map集合传参"></a>用Map集合传参</h3><p>在方法中创建一个HashMap</p>
+<ul>
+<li>key用来使数据与insert语句中的参数一一对应</li>
+<li>value表示数据的值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testInsertCar</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br><br>        <span class="hljs-comment">// 前端传过来数据了。</span><br>        <span class="hljs-comment">// 这个对象我们先使用Map集合进行数据的封装。</span><br>        Map&lt;String, Object&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>        map.put(<span class="hljs-string">&quot;carNum&quot;</span>, <span class="hljs-string">&quot;1111&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;brand&quot;</span>, <span class="hljs-string">&quot;比亚迪汉2&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;guidePrice&quot;</span>, <span class="hljs-number">10.0</span>);<br>        map.put(<span class="hljs-string">&quot;produceTime&quot;</span>, <span class="hljs-string">&quot;2020-11-11&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;carType&quot;</span>, <span class="hljs-string">&quot;电车&quot;</span>);<br><br>        <span class="hljs-comment">// 执行SQL语句</span><br>        <span class="hljs-comment">// insert方法的参数：</span><br>        <span class="hljs-comment">// 第一个参数：sqlId，从CarMapper.xml文件中复制。</span><br>        <span class="hljs-comment">// 第二个参数：封装数据的对象。</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.insert(<span class="hljs-string">&quot;insertCar&quot;</span>, map);<br>        System.out.println(count);<br><br>        sqlSession.commit();<br>        sqlSession.close();<br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<p>对应的CarMapper.xml文件中的insert标签如下：</p>
+<ul>
+<li>#{}中的变量名 要与Map中的key一一对应</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertCar&quot;</span>&gt;</span><br>    insert into t_car(id,car_num,brand,guide_price,produce_time,car_type) <br>    values(null,#&#123;carNum&#125;,#&#123;brand&#125;,#&#123;guidePrice&#125;,#&#123;produceTime&#125;,#&#123;carType&#125;);<br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="用POJO传参"><a href="#用POJO传参" class="headerlink" title="用POJO传参"></a>用POJO传参</h3>
                 
               </div>
             
