@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.2k 字
+          8.8k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          44 分钟
+          74 分钟
         
       </span>
     
@@ -331,7 +331,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：1 分钟前
+                    本文最后更新于：2 分钟前
                   
                 
               </p>
@@ -496,6 +496,85 @@
 <li>实际值：被测试的业务方法真正的执行结果</li>
 <li>期望值：期望的执行结果</li>
 </ol>
+<h1 id="关于logback日志组件"><a href="#关于logback日志组件" class="headerlink" title="关于logback日志组件"></a>关于logback日志组件</h1><p>mybatis常见的集成的日志组件有哪些？</p>
+<ul>
+<li>SLF4J（沙拉风）：沙拉风是一个日志标准，其中有一个框架叫做logback，它实现了沙拉风规范</li>
+<li>LOG4J</li>
+<li>LOG4J2</li>
+<li>STDOUT_LOGGING</li>
+<li>……</li>
+<li>LOG4J、LOG4J2、logback 都是同一个作者开发的</li>
+</ul>
+<h2 id="STDOUT-LOGGING（标准日志）"><a href="#STDOUT-LOGGING（标准日志）" class="headerlink" title="STDOUT_LOGGING（标准日志）"></a>STDOUT_LOGGING（标准日志）</h2><p>STDOUT_LOGGING是标准日志，mybatis已经实现了这种标准日志，mybatis框架本身已经实现了这种标准，只要开启即可。</p>
+<p>开启方法是在mybatis-config.xml文件中使用settings标签进行开启：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--开启mybatis对标准日志的实现。--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">settings</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;logImpl&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;STDOUT_LOGGING&quot;</span>/&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">setting</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;logImpl&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;SLF4J&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">settings</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：settings标签必须放在configuration标签内的最前面（如果有properties标签，则放在第二位，也就是properties标签的后面），否则会报如下错误：</p>
+<ul>
+<li>大致的意思是说configuration标签内的标签<strong>必须按照指定顺序排列</strong>（这是由上面的<strong>mybatis-3-config.dtd文件规定的</strong>）</li>
+<li>dtd：文档类型规范的意思，mybatis-3-config.dtd的作用就是约束mybatis-config.xml文档：<ul>
+<li>可以出现什么标签</li>
+<li>标签的嵌套规则是什么样的</li>
+<li>每个标签中有什么属性，属性值都有什么</li>
+<li>……</li>
+</ul>
+</li>
+<li><img src="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/image-20231009112027273.png" srcset="/img/loading.gif" lazyload alt="image-20231009112027273"></li>
+</ul>
+<h2 id="logback（第三方日志框架）"><a href="#logback（第三方日志框架）" class="headerlink" title="logback（第三方日志框架）"></a>logback（第三方日志框架）</h2><p>logback日志框架实现了SLF4J标准（沙拉风：日志门面、日志标准）</p>
+<p>mybatis集成logback：</p>
+<ol>
+<li><p>在pom.xml文件中引入logback依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--引入logback的依赖，这个日志框架实现了slf4j规范--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>ch.qos.logback<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>logback-classic<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>引入logback所必须的xml配置文件</p>
+<ul>
+<li><p>这个配置文件的名字<strong>必须</strong>叫做：logback.xml 或 logback-test.xml</p>
+<p>这个配置文件<strong>必须</strong>放到类的根路径下，不能是其他位置</p>
+<p>主要配置日志输出的相关级别、日志具体的格式</p>
+</li>
+<li><pre><code class="xml">
+</code></pre>
+</li>
+</ul>
+</li>
+</ol>
+  <?xml version="1.0" encoding="UTF-8"?>
+<pre><code class="hljs"> &lt;configuration debug=&quot;false&quot;&gt;
+     &lt;!-- 控制台输出 --&gt;
+     &lt;appender name=&quot;STDOUT&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+         &lt;encoder class=&quot;ch.qos.logback.classic.encoder.PatternLayoutEncoder&quot;&gt;
+             &lt;!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符--&gt;
+             &lt;pattern&gt;[%thread] %-5level %logger&#123;50&#125; - %msg%n&lt;/pattern&gt;
+         &lt;/encoder&gt;
+     &lt;/appender&gt;
+ 
+     &lt;!--mybatis log configure--&gt;
+     &lt;logger name=&quot;com.apache.ibatis&quot; level=&quot;TRACE&quot;/&gt;
+     &lt;logger name=&quot;java.sql.Connection&quot; level=&quot;DEBUG&quot;/&gt;
+     &lt;logger name=&quot;java.sql.Statement&quot; level=&quot;DEBUG&quot;/&gt;
+     &lt;logger name=&quot;java.sql.PreparedStatement&quot; level=&quot;DEBUG&quot;/&gt;
+ 
+     &lt;!-- 日志输出级别,logback日志级别包括五个：TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR --&gt;
+     &lt;root level=&quot;DEBUG&quot;&gt;
+         &lt;appender-ref ref=&quot;STDOUT&quot;/&gt;
+         &lt;appender-ref ref=&quot;FILE&quot;/&gt;
+     &lt;/root&gt;
+    
+ &lt;/configuration&gt;
+ <figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs haxe">   <br>   * 日志输出级别：TRACE &lt; DEBUG &lt; INFO &lt; WARN &lt; ERROR<br>   <br>     级别越高，输出的信息越少，ERROR级别只有在报错的时候才输出日志<br>   <br>   使用第三方日志框架，可以不配置\&lt;settings&gt;标签！<br><br><span class="hljs-meta"># Mybatis工具类的编写</span><br><br>可以编写一个关于sqlSession的工具类，把这些功能封装起来，更方便<br><br><span class="hljs-meta">## 工具类的规范：</span><br><br>* 工具类的构造方法一般都是私有化的。为了防止<span class="hljs-keyword">new</span><span class="hljs-type"></span>对象<br>* 工具类中所有的方法都是静态(<span class="hljs-keyword">static</span>)的，直接采用类名即可调用。不需要<span class="hljs-keyword">new</span><span class="hljs-type"></span>对象。<br><br><br><br><span class="hljs-meta">## openSession方法</span><br><br>```java<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> SqlSession openSession()&#123;<br>        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="hljs-keyword">new</span> <span class="hljs-type">SqlSessionFactoryBuilder</span>();<br>        SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>));<br>        SqlSession sqlSession = sqlSessionFactory.openSession();<br>        <span class="hljs-keyword">return</span> sqlSession;<br>&#125;<br></code></pre></td></tr></table></figure>
+</code></pre>
+<p>如果按照此方法，则每次调用openSession方法时，都会创造一个新的SqlSessionFactory对象，但实际上并不需要（很浪费资源）。</p>
+<p>通常来讲，一个SqlSessionFactory对应一个environment，一个environment通常是一个数据库。</p>
+<p>所以可以将这一部分代码<strong>放入static静态代码块中</strong>，静态代码块中的内容在<strong>类加载时初始化（只初始化一次）</strong></p>
+<p>更改如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">static</span> &#123;<br>	<span class="hljs-keyword">try</span> &#123;<br>		sqlSessionFactory = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SqlSessionFactoryBuilder</span>().build(Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>));<br>	&#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>		<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e);<br>	&#125;<br>&#125;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 获取会话对象。</span><br><span class="hljs-comment">* <span class="hljs-doctag">@return</span> 会话对象</span><br><span class="hljs-comment">*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> SqlSession <span class="hljs-title function_">openSession</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> sqlSessionFactory.openSession();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>拥有工具类之后，测试方法也变得简洁了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testInsertCarByUtil</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br><span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.insert(<span class="hljs-string">&quot;insertCar&quot;</span>);<br>	System.out.println(count);<br>	sqlSession.commit();<br>	sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
@@ -553,7 +632,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月8日</div>
+          <div>2023年10月9日</div>
         </div>
       
       
