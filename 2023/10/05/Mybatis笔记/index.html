@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          13k 字
+          16k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          106 分钟
+          135 分钟
         
       </span>
     
@@ -331,7 +331,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：5 分钟前
+                    本文最后更新于：2 分钟前
                   
                 
               </p>
@@ -604,6 +604,85 @@
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">insert</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;insertCar&quot;</span>&gt;</span><br>	insert into t_car(id,car_num,brand,guide_price,produce_time,car_type)<br>    values(null,#&#123;carNum&#125;,#&#123;brand&#125;,#&#123;guidePrice&#125;,#&#123;produceTime&#125;,#&#123;carType&#125;)<br><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">delete</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;deleteById&quot;</span>&gt;</span><br>	delete from t_car where id = #&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">delete</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>这里的”#{}”中可以写任意名称，因为只有一个参数，所以占位符内名称可以任意（不过最好见名知意）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testDeleteById</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br>	<span class="hljs-comment">// 执行SQL语句</span><br>	<span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.delete(<span class="hljs-string">&quot;deleteById&quot;</span>, <span class="hljs-number">66</span>);<br>	System.out.println(count);<br>	sqlSession.commit();<br>	sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：上述代码中的66本来是一个int变量，实际上66会被<strong>自动封装成一个包装类</strong>传入</p>
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">update</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;updateById&quot;</span>&gt;</span><br>    update t_car set<br>    	car_num=#&#123;carNum&#125;,<br>   		brand=#&#123;brand&#125;,<br>    	guide_price=#&#123;guidePrice&#125;,<br>    	produce_time=#&#123;produceTime&#125;,<br>    	car_type=#&#123;carType&#125;<br>    where<br>    	id = #&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">update</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>测试方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testUpdateById</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br>    <span class="hljs-comment">// 准备数据</span><br>    <span class="hljs-type">Car</span> <span class="hljs-variable">car</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(<span class="hljs-number">4L</span>, <span class="hljs-string">&quot;9999&quot;</span>, <span class="hljs-string">&quot;凯美瑞&quot;</span>, <span class="hljs-number">30.3</span>, <span class="hljs-string">&quot;1999-11-10&quot;</span>, <span class="hljs-string">&quot;燃油车&quot;</span>);<br>    <span class="hljs-comment">// 执行SQL语句</span><br>    <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.update(<span class="hljs-string">&quot;updateById&quot;</span>, car);<br>    System.out.println(count);<br>    sqlSession.commit();<br>    sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：id传入4L是因为数据库表中设置id字段为bigint类型，需要用long类型的数据与之对应</p>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><h3 id="查一个"><a href="#查一个" class="headerlink" title="查一个"></a>查一个</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectById&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.powernode.mybatis.pojo.Car&quot;</span>&gt;</span><br>	select * from t_car where id = #&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>注意：关于resultType属性：</p>
+<ul>
+<li><strong>resultType属性必须填！！！</strong>不然mybatis根本不清楚 查询出来的结果集 要封装成什么类型的对象！！！就会报错！！！</li>
+<li>必须填全类名：com.whr.mybatis.pojo.Car</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSelectById</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br>	<br>	<span class="hljs-type">Object</span> <span class="hljs-variable">car</span> <span class="hljs-operator">=</span> sqlSession.selectOne(<span class="hljs-string">&quot;selectById&quot;</span>, <span class="hljs-number">1</span>);<br>	System.out.println(car);<br>	sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>底层执行过程：</p>
+<ol>
+<li>执行DQL语句。查询。根据id查询。返回结果一定是一条。</li>
+<li>mybatis底层执行了select语句之后，一定会返回一个结果集对象：ResultSet</li>
+<li>mybatis应该从ResultSet中取出数据，封装java对象。（所以才会返回一个java对象）</li>
+</ol>
+<p>此时查询结果为：</p>
+<p><img src="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/image-20231010122445776.png" srcset="/img/loading.gif" lazyload alt="image-20231010122445776"></p>
+<p>可以看到有很多null值，说明有一部分值并未传进去，这里的原因是：</p>
+<ul>
+<li><p>数据库表中的字段为：id、car_num、brand、guide_price、produce_time、car_type</p>
+<p>而Car类中属性值为：id、carNum、brand、guidePrice、produceTime、carType</p>
+</li>
+<li><p>其中id、brand字段是相同的</p>
+<p>其他字段不同，所以在映射的时候找不到对应的变量</p>
+<p>这也是使用”select *”的弊端</p>
+</li>
+<li><p>实际上应该在SQL语句中将它们一一对应</p>
+</li>
+</ul>
+<p>于是xml文件中应该改成如下形式：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectById&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.powernode.mybatis.pojo.Car&quot;</span>&gt;</span><br>	select<br>		id,<br>    	car_num as carNum,<br>    	brand,<br>    	guide_price as guidePrice,<br>		produce_time as produceTime,<br>		car_type as carType<br>	from<br>		t_car<br>	where<br>		id = #&#123;id&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>运行测试方法testSelectById()，查询结果如下：</p>
+<p><img src="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/image-20231010123531011.png" srcset="/img/loading.gif" lazyload alt="image-20231010123531011"></p>
+<p>注意：如果报如下错误，则需要去掉xml文件中select标签内的注释内容</p>
+<p><img src="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/image-20231010121939715.png" srcset="/img/loading.gif" lazyload alt="image-20231010121939715"></p>
+<p>或</p>
+<p><img src="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/image-20231010122330979.png" srcset="/img/loading.gif" lazyload alt="image-20231010122330979"></p>
+<h3 id="查一堆"><a href="#查一堆" class="headerlink" title="查一堆"></a>查一堆</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;selectAll&quot;</span> <span class="hljs-attr">resultType</span>=<span class="hljs-string">&quot;com.powernode.mybatis.pojo.Car&quot;</span>&gt;</span><br>    select<br>    	id,car_num as carNum,brand,guide_price as guidePrice,<br>    	produce_time as produceTime,<br>    	car_type as carType<br>    from<br>    	t_car<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>测试方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSelectAll</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br>    <span class="hljs-comment">// 执行SQL语句</span><br>    List&lt;Car&gt; cars = sqlSession.selectList(<span class="hljs-string">&quot;selectAll&quot;</span>);<br>    <span class="hljs-comment">// 遍历（Lambda表达式）</span><br>    cars.forEach(car -&gt; System.out.println(car));<br>    sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>注意：虽然查询结果返回的是List&lt;Car&gt;，但resultType属性的值依然是Car的全类名</p>
+<h1 id="关于namespace"><a href="#关于namespace" class="headerlink" title="关于namespace"></a>关于namespace</h1><p>上述测试方法testSelectAll()运行结果如下：（报错）</p>
+<p><img src="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/image-20231010124846408.png" srcset="/img/loading.gif" lazyload alt="image-20231010124846408"></p>
+<p>原因：</p>
+<ul>
+<li><p>CarMapper.xml中有id为”selectAll”的SQL语句之外</p>
+<p>UserMapper.xml中也有id为”selectAll”的SQL语句</p>
+<p>mybatis无法确定应该运行哪个，于是报错</p>
+</li>
+<li><p>解决办法：</p>
+<ol>
+<li><p>设置mapper标签中的namespace属性如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">namespace</span>=<span class="hljs-string">&quot;CarMapper&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>将测试方法中sqlSession.selectList()方法的参数设置为”namespace值.id”的形式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSelectAll</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> SqlSessionUtil.openSession();<br>    <span class="hljs-comment">// 执行SQL语句(参数由&quot;selectAll&quot;改为&quot;CarMapper.selectAll&quot;)</span><br>    List&lt;Car&gt; cars = sqlSession.selectList(<span class="hljs-string">&quot;CarMapper.selectAll&quot;</span>);<br>    <span class="hljs-comment">// 遍历（Lambda表达式）</span><br>    cars.forEach(car -&gt; System.out.println(car));<br>    sqlSession.close();<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>namespace是为了防止SQL语句id重复的问题</li>
+<li>为了避免id重复，可以使用”namespace值.id”的形式</li>
+</ul>
 
                 
               </div>
@@ -661,7 +740,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月9日</div>
+          <div>2023年10月10日</div>
         </div>
       
       
