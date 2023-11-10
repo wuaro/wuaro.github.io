@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          16k 字
+          21k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          135 分钟
+          177 分钟
         
       </span>
     
@@ -287,7 +287,7 @@
         aria-expanded="true"
       >
         学习笔记
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(6)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -301,10 +301,55 @@
     
       
       
+        <a href="/2023/11/10/MybatisPlus%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MybatisPlus学习笔记"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">MybatisPlus学习笔记</span>
+        </a>
+      
+    
+      
+      
         <a href="/2023/10/05/Mybatis%E7%AC%94%E8%AE%B0/" title="Mybatis笔记"
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">Mybatis笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/10/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Redis学习笔记"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Redis学习笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/10/SpringBoot%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="SpringBoot学习笔记"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">SpringBoot学习笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/10/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="SpringMvc学习笔记"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">SpringMvc学习笔记</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/10/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Spring学习笔记"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Spring学习笔记</span>
         </a>
       
     
@@ -331,7 +376,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：10 天前
+                    本文最后更新于：9 分钟前
                   
                 
               </p>
@@ -481,20 +526,22 @@
 <li><p>第一个完整的mybatis程序：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBatisCompleteTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">SqlSession</span> <span class="hljs-variable">sqlSession</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">SqlSessionFactoryBuilder</span> <span class="hljs-variable">sqlSessionFactoryBuilder</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SqlSessionFactoryBuilder</span>();<br>            <span class="hljs-type">SqlSessionFactory</span> <span class="hljs-variable">sqlSessionFactory</span> <span class="hljs-operator">=</span> sqlSessionFactoryBuilder.build(Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>));<br>            <span class="hljs-comment">// 开启会话（底层会开启事务）</span><br>            sqlSession = sqlSessionFactory.openSession();<br>            <span class="hljs-comment">// 执行SQL语句，处理相关业务</span><br>            <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> sqlSession.insert(<span class="hljs-string">&quot;insertCar&quot;</span>);<br>            System.out.println(count);<br>            <span class="hljs-comment">// 执行到这里，没有发生任何异常，提交事务。终止事务。</span><br>            sqlSession.commit();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            <span class="hljs-comment">// 最好回滚事务</span><br>            <span class="hljs-keyword">if</span> (sqlSession != <span class="hljs-literal">null</span>) &#123;<br>                sqlSession.rollback();<br>            &#125;<br>            e.printStackTrace();<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-comment">// 关闭会话（释放资源）</span><br>            <span class="hljs-keyword">if</span> (sqlSession != <span class="hljs-literal">null</span>) &#123;<br>                sqlSession.close();<br>            &#125;<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ol>
-<h1 id="关于junit测试工具"><a href="#关于junit测试工具" class="headerlink" title="关于junit测试工具"></a>关于junit测试工具</h1><p>关于测试的一些规范：</p>
+<h1 id="关于JUnit测试工具"><a href="#关于JUnit测试工具" class="headerlink" title="关于JUnit测试工具"></a>关于JUnit测试工具</h1><h2 id="关于测试，以及什么是JUnit？"><a href="#关于测试，以及什么是JUnit？" class="headerlink" title="关于测试，以及什么是JUnit？"></a>关于测试，以及什么是JUnit？</h2><p>JUnit是专⻔做单元测试的组件。 </p>
+<p>在开发过程中，我们必须对自己写的每⼀个业务⽅法负责，所以我们需要编写一些测试方法来测试，保证每个业务方法都能够通过测试。</p>
+<p>单元测试中有两个重要概念：</p>
 <ol>
+<li>实际值：被测试的业务方法真正的执行结果</li>
+<li>期望值：期望的执行结果</li>
+</ol>
+<p>@Test这个注解很重要</p>
+<p>只要被这个注解标注的方法就是一个测试方法</p>
+<h2 id="关于测试的一些规范"><a href="#关于测试的一些规范" class="headerlink" title="关于测试的一些规范"></a>关于测试的一些规范</h2><ol>
 <li><p>测试类名字规范：要测试的类名+Test（如：MathServiceTest）</p>
 <p>测试方法名字规范：test+要测试的方法名（如：testSum）</p>
 </li>
 <li><p>一般是一个业务方法对应一个测试方法</p>
 </li>
-</ol>
-<p>@Test这个注解很重要</p>
-<p>只要被这个注解标注的方法就是一个测试方法</p>
-<p>单元测试中有两个重要概念：</p>
-<ol>
-<li>实际值：被测试的业务方法真正的执行结果</li>
-<li>期望值：期望的执行结果</li>
+<li></li>
 </ol>
 <h1 id="关于logback日志组件"><a href="#关于logback日志组件" class="headerlink" title="关于logback日志组件"></a>关于logback日志组件</h1><p>mybatis常见的集成的日志组件有哪些？</p>
 <ul>
@@ -683,6 +730,27 @@
 <li>namespace是为了防止SQL语句id重复的问题</li>
 <li>为了避免id重复，可以使用”namespace值.id”的形式</li>
 </ul>
+<h1 id="核心配置文件——mybatis-config-xml"><a href="#核心配置文件——mybatis-config-xml" class="headerlink" title="核心配置文件——mybatis-config.xml"></a>核心配置文件——mybatis-config.xml</h1><p>mybatis-config.xml示例如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">configuration</span></span><br><span class="hljs-meta">        <span class="hljs-keyword">PUBLIC</span> <span class="hljs-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!--java.util.Properties类。是一个Map集合。key和value都是String类型--&gt;</span><br>    <span class="hljs-comment">&lt;!--在properties标签中可以配置很多属性--&gt;</span><br>    <span class="hljs-comment">&lt;!--&lt;properties&gt;--&gt;</span><br>        <span class="hljs-comment">&lt;!--这是其中的一个属性--&gt;</span><br>        <span class="hljs-comment">&lt;!--&lt;property name=&quot;属性名&quot; value=&quot;属性值&quot;/&gt;--&gt;</span><br>        <span class="hljs-comment">&lt;!--&lt;property name=&quot;jdbc.driver&quot; value=&quot;com.mysql.cj.jdbc.Driver&quot;/&gt;</span><br><span class="hljs-comment">        &lt;property name=&quot;jdbc.url&quot; value=&quot;jdbc:mysql://localhost:3306/powernode&quot;/&gt;</span><br><span class="hljs-comment">        &lt;property name=&quot;jdbc.username&quot; value=&quot;root&quot;/&gt;</span><br><span class="hljs-comment">        &lt;property name=&quot;jdbc.password&quot; value=&quot;root&quot;/&gt;--&gt;</span><br>    <span class="hljs-comment">&lt;!--&lt;/properties&gt;--&gt;</span><br><br>    <span class="hljs-comment">&lt;!--resource,一定是从类路径下开始查找资源--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;jdbc.properties&quot;</span> /&gt;</span><br><br>    <span class="hljs-comment">&lt;!--从绝对路径当中加载资源。绝对路径怎么写？file:///路径--&gt;</span><br>    <span class="hljs-comment">&lt;!--&lt;properties url=&quot;file:///d:/jdbc.properties&quot; /&gt;--&gt;</span><br><br><br><br>    <span class="hljs-comment">&lt;!--default表示默认使用的环境。--&gt;</span><br>    <span class="hljs-comment">&lt;!--默认环境什么意思？当你使用mybatis创建SqlSessionFactory对象的时候，没有指定环境的话，默认使用哪个环境。--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;powernodeDB&quot;</span>&gt;</span><br><br>        <span class="hljs-comment">&lt;!--其中的一个环境。连接的数据库是powernodeDB--&gt;</span><br>        <span class="hljs-comment">&lt;!--一般一个环境对应一个数据库--&gt;</span><br>        <span class="hljs-comment">&lt;!--一般一个数据库会对应一个SqlSessionFactory对象。--&gt;</span><br>        <span class="hljs-comment">&lt;!--所以一个环境environment会对应一个SqlSessionFactory对象--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;powernodeDB&quot;</span>&gt;</span><br>            <span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">                transactionManager标签：</span><br><span class="hljs-comment">                    1.作用：配置事务管理器。指定mybatis具体使用什么方式去管理事务。</span><br><span class="hljs-comment">                    2.type属性有两个值：</span><br><span class="hljs-comment">                        第一个：JDBC: 使用原生的JDBC代码来管理事务。</span><br><span class="hljs-comment">                            conn.setAutoCommit(false);</span><br><span class="hljs-comment">                            ....</span><br><span class="hljs-comment">                            conn.commit();</span><br><span class="hljs-comment">                        第二个：MANAGED：mybatis不再负责事务的管理，将事务管理交给其它的JEE(JavaEE)容器来管理。例如：spring</span><br><span class="hljs-comment">                    3. 大小写无所谓。不区分大小写。但是不能写其他值。只能是二选一：</span><br><span class="hljs-comment">                        jdbc、managed</span><br><span class="hljs-comment">                    4. 在mybatis中提供了一个事务管理器接口：Transaction</span><br><span class="hljs-comment">                        该接口下有两个实现类：</span><br><span class="hljs-comment">                            JdbcTransaction</span><br><span class="hljs-comment">                            ManagedTransaction</span><br><span class="hljs-comment">                        如果type=&quot;JDBC&quot;，那么底层会实例化JdbcTransaction对象。</span><br><span class="hljs-comment">                        如果type=&quot;MANAGED&quot;，那么底层会实例化ManagedTransaction</span><br><span class="hljs-comment">            --&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>            <span class="hljs-comment">&lt;!--</span><br><span class="hljs-comment">                dataSource配置：</span><br><span class="hljs-comment">                    1.dataSource被称为数据源。</span><br><span class="hljs-comment">                    2.dataSource作用是什么？为程序提供Connection对象。（但凡是给程序提供Connection对象的，都叫做数据源。）</span><br><span class="hljs-comment">                    3.数据源实际上是一套规范。JDK中有这套规范：javax.sql.DataSource（这个数据源的规范，这套接口实际上是JDK规定的。）</span><br><span class="hljs-comment">                    4.我们自己也可以编写数据源组件，只要实现javax.sql.DataSource接口就行了。实现接口当中所有的方法。这样就有了自己的数据源。</span><br><span class="hljs-comment">                    比如你可以写一个属于自己的数据库连接池（数据库连接池是提供连接对象的，所以数据库连接池就是一个数据源）。</span><br><span class="hljs-comment">                    5.常见的数据源组件有哪些呢【常见的数据库连接池有哪些呢】？</span><br><span class="hljs-comment">                        阿里巴巴的德鲁伊连接池：druid</span><br><span class="hljs-comment">                        c3p0</span><br><span class="hljs-comment">                        dbcp</span><br><span class="hljs-comment">                        ....</span><br><span class="hljs-comment">                    6. type属性用来指定数据源的类型，就是指定具体使用什么方式来获取Connection对象：</span><br><span class="hljs-comment">                        type属性有三个值：必须是三选一。</span><br><span class="hljs-comment">                        type=&quot;[UNPOOLED|POOLED|JNDI]&quot;</span><br><span class="hljs-comment">                        UNPOOLED：不使用数据库连接池技术。每一次请求过来之后，都是创建新的Connection对象。</span><br><span class="hljs-comment">                        POOLED：使用mybatis自己实现的数据库连接池。</span><br><span class="hljs-comment">                        JNDI：集成其它第三方的数据库连接池。</span><br><span class="hljs-comment"></span><br><span class="hljs-comment">                        JNDI是一套规范。谁实现了这套规范呢？大部分的web容器都实现了JNDI规范：</span><br><span class="hljs-comment">                            例如：Tomcat、Jetty、WebLogic、WebSphere，这些服务器(容器)都实现了JNDI规范。</span><br><span class="hljs-comment">                        JNDI是：java命名目录接口。Tomcat服务器实现了这个规范。</span><br><span class="hljs-comment">            --&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;jdbc.driver&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;$&#123;jdbc.password&#125;&quot;</span>/&gt;</span><br>                <span class="hljs-comment">&lt;!--提醒：正常使用连接池的话，池中有很多参数是需要设置的。设置好参数，可以让连接池发挥的更好。事半功倍的效果。--&gt;</span><br>                <span class="hljs-comment">&lt;!--具体连接池当中的参数如何配置呢？需要反复的根据当前业务情况进行测试。--&gt;</span><br>                <span class="hljs-comment">&lt;!--poolMaximumActiveConnections：连接池当中最多的正在使用的连接对象的数量上限。最多有多少个连接可以活动。默认值10--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;poolMaximumActiveConnections&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;10&quot;</span>/&gt;</span><br>                <span class="hljs-comment">&lt;!--每隔2秒打印日志，并且尝试获取连接对象--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;poolTimeToWait&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;2000&quot;</span>/&gt;</span><br>                <span class="hljs-comment">&lt;!--强行让某个连接空闲，超时时间的设置--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;poolMaximumCheckoutTime&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;10000&quot;</span>/&gt;</span><br>                <span class="hljs-comment">&lt;!--最多的空闲数量--&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;poolMaximumIdleConnections&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;5&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--这是mybatis的另一个环境，也就是连接的数据库是另一个数据库mybatis--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;mybatisDB&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/mybatis&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;root&quot;</span>/&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;root&quot;</span>/&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;CarMapper.xml&quot;</span>/&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="configuration标签"><a href="#configuration标签" class="headerlink" title="configuration标签"></a>configuration标签</h2><p>作用：根标签，表示配置信息</p>
+<h2 id="environments标签"><a href="#environments标签" class="headerlink" title="environments标签"></a>environments标签</h2><p>作用：环境标签（里面可以有多个环境）</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p>default属性</p>
+<ul>
+<li><p>表示默认使用的环境。</p>
+</li>
+<li><p>设置默认环境有什么用？</p>
+<p>当在程序中使用mybatis创建SqlSessionFactory对象的时候，如果没有在参数中指定某一环境，则默认使用default属性所设置的环境。</p>
+</li>
+<li><p>default后⾯填写的是 子标签environment中的id</p>
+<p>default的值只需要和某一对environment标签的id值⼀致即可</p>
+</li>
+<li><p>环境是指什么？</p>
+<p>这个暂时不清楚！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！</p>
+</li>
+</ul>
+<h3 id="子标签"><a href="#子标签" class="headerlink" title="子标签"></a>子标签</h3><h4 id="environment标签"><a href="#environment标签" class="headerlink" title="environment标签"></a>environment标签</h4><h5 id="属性-1"><a href="#属性-1" class="headerlink" title="属性"></a>属性</h5><p>id：给当前环境⼀个唯⼀标识，该标识⽤在environments的default后⾯，⽤来指定默认环境的<br>选择</p>
+<h5 id="子标签-1"><a href="#子标签-1" class="headerlink" title="子标签"></a>子标签</h5><p>也就是说mybatis的环境可以配置多个数据<br>源。</p>
 
                 
               </div>
@@ -740,7 +808,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年10月10日</div>
+          <div>2023年11月10日</div>
         </div>
       
       

@@ -16,11 +16,11 @@
   <meta name="author" content="五花肉">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一.前期准备1. 安装git 下载Git：https://git-scm.com/downloads/  下载对应的exe文件，选择合适的安装路径，一路next即可  安装完成后打开cmd，输入如下代码，如果出现版本信息证明安装成功 1git --version    此时在桌面点击右键会出现git相关标识     2. 安装Node.js 下载安装Node.js：https://nodejs.o">
+    <meta name="description" content="GitGit工作流程 命令如下：  clone（克隆）: 从远程仓库中把代码克隆到本地仓库   checkout （检出）:从本地仓库中检出一个仓库分支然后进行修订  add（添加）: 在提交到本地仓库之前，先将代码添加到暂存区  commit（提交）: 提交到本地仓库 ​								本地仓库中保存了修改的各个历史版本   fetch (抓取) ： 从远程仓库，抓取到本地仓库，不进行任何的合并">
   
   
   
-  <title>hexo+gitee搭建个人博客（详细） - WHRのblog</title>
+  <title>Git的使用 - WHRのblog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="hexo+gitee搭建个人博客（详细）"></span>
+            <span id="subtitle" data-typed-text="Git的使用"></span>
           
         </div>
 
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-02 12:05" pubdate>
-          2023年9月2日 中午
+        <time datetime="2023-10-19 18:37" pubdate>
+          2023年10月19日 晚上
         </time>
       </span>
     
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.5k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          18 分钟
+          21 分钟
         
       </span>
     
@@ -303,7 +303,7 @@
       
         <a href="/2023/10/19/Git%E7%9A%84%E4%BD%BF%E7%94%A8/" title="Git的使用"
            class="list-group-item list-group-item-action
-           ">
+           active">
           <span class="category-post">Git的使用</span>
         </a>
       
@@ -312,7 +312,7 @@
       
         <a href="/2023/09/02/hexo+gitee/" title="hexo+gitee搭建个人博客（详细）"
            class="list-group-item list-group-item-action
-           active">
+           ">
           <span class="category-post">hexo+gitee搭建个人博客（详细）</span>
         </a>
       
@@ -344,12 +344,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">hexo+gitee搭建个人博客（详细）</h1>
+            <h1 id="seo-header">Git的使用</h1>
             
               <p class="note note-info">
                 
                   
-                    本文最后更新于：2 个月前
+                    本文最后更新于：4 分钟前
                   
                 
               </p>
@@ -357,127 +357,160 @@
             
               <div class="markdown-body">
                 
-                <h1 id="一-前期准备"><a href="#一-前期准备" class="headerlink" title="一.前期准备"></a>一.前期准备</h1><h2 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1. 安装git"></a>1. 安装git</h2><ol>
-<li><p>下载Git：<a target="_blank" rel="noopener" href="https://git-scm.com/downloads/">https://git-scm.com/downloads/</a></p>
-</li>
-<li><p>下载对应的exe文件，选择合适的安装路径，一路next即可</p>
-</li>
-<li><p>安装完成后打开cmd，输入如下代码，如果出现版本信息证明安装成功</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">git <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/2023/09/02/hexo+gitee/image-20230902103728706.png" srcset="/img/loading.gif" lazyload alt="image-20230902103728706"></p>
-</li>
-<li><p>此时在桌面点击右键会出现git相关标识</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902103912191.png" srcset="/img/loading.gif" lazyload alt="image-20230902103912191"></p>
-</li>
-<li></li>
-</ol>
-<h2 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2. 安装Node.js"></a>2. 安装Node.js</h2><ol>
-<li><p>下载安装Node.js：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download">https://nodejs.org/en/download</a></p>
-</li>
-<li><p>安装完成后打开cmd，输入如下代码，如果出现版本信息证明安装成功</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span><br></code></pre></td></tr></table></figure>
-
-<p><img src="/2023/09/02/hexo+gitee/image-20230902133219986.png" srcset="/img/loading.gif" lazyload alt="image-20230902133219986"></p>
-</li>
-<li></li>
-</ol>
-<h2 id="3-安装cnpm"><a href="#3-安装cnpm" class="headerlink" title="3. 安装cnpm"></a>3. 安装cnpm</h2><ol>
-<li><p>打开cmd，输入如下命令，安装cnpm</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">npm install -g cnpm --registry==https:<span class="hljs-regexp">//</span>registry.npm.taobao.org<br></code></pre></td></tr></table></figure>
-</li>
-<li><p>由于安装的是高版本，后续可能会出现问题，如果有顾虑可以卸载，安装一个指定版本的cnpm</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">npm</span> uninstall -g cnpm<br><br><span class="hljs-attribute">npm</span> install cnpm@<span class="hljs-number">7</span>.<span class="hljs-number">1</span>.<span class="hljs-number">0</span> -g<br></code></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="4-安装hexo"><a href="#4-安装hexo" class="headerlink" title="4. 安装hexo"></a>4. 安装hexo</h2><ol>
-<li><p>打开cmd，输入如下命令，安装hexo</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">cnpm install -g hexo-<span class="hljs-keyword">cli</span><br></code></pre></td></tr></table></figure>
-</li>
-<li><p>输入如下命令，如果出现hexo版本信息，说明安装成功</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">hexo -v</span> <br></code></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="二-创建博客"><a href="#二-创建博客" class="headerlink" title="二.创建博客"></a>二.创建博客</h1><h2 id="1-在gitee中创建仓库并配置"><a href="#1-在gitee中创建仓库并配置" class="headerlink" title="1. 在gitee中创建仓库并配置"></a>1. 在gitee中创建仓库并配置</h2><ol>
-<li><p>在gitee中创建仓库，仓库名字任意，不过路径最好和前面的个人空间地址（用户名）一致，如下：</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902155803996.png" srcset="/img/loading.gif" lazyload alt="image-20230902155803996"></p>
-<p>若两者一致，则最终生成的博客地址会相对缩短（相同的部分会省略）：</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902160331865.png" srcset="/img/loading.gif" lazyload alt="image-20230902160331865"></p>
-<p>否则会很长，比如起名为“wu_hua_rou123”，会产生如下地址：</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902160440238.png" srcset="/img/loading.gif" lazyload alt="image-20230902160440238"></p>
-</li>
-<li><p>打开c盘用户目录，在地址栏输入git bash打开面板</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> ~/.ssh<br><span class="hljs-built_in">ls</span> <br>ssh-keygen -t ed25519 -C <span class="hljs-string">&quot;邮箱地址&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>第三条命令是使用ed25519算法来生成密钥，此时在~&#x2F;.ssh目录下会生成两个文件：</p>
-<p>id_加密算法名、id_加密算法名.pub</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902161733431.png" srcset="/img/loading.gif" lazyload alt="image-20230902161733431"></p>
-<p>其中 id_加密算法名.pub 内是公钥，此时在gitee右上角头像处点击设置，左侧栏中点击SSH公钥，将文件中的公钥粘贴过去，并设置一个标题</p>
-</li>
-<li><p>测试SSH连接</p>
-<p>在刚才打开的git bash窗口中，输入如下指令：</p>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs crystal"><span class="hljs-variable">$ </span>ssh -T git<span class="hljs-variable">@gitee</span>.com<br></code></pre></td></tr></table></figure>
-
-<p>如果看到successfully即为连接成功：</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902162946941.png" srcset="/img/loading.gif" lazyload alt="image-20230902162946941"></p>
-</li>
-</ol>
-<p>​		</p>
-<h2 id="2-初始化博客"><a href="#2-初始化博客" class="headerlink" title="2. 初始化博客"></a>2. 初始化博客</h2><ol>
-<li><p>在任意位置新建文件夹用于存放博客（文件夹名字尽量不要中文）</p>
-</li>
-<li><p>在新建的目录下打开git bash，输入如下指令，初始化博客</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">hexo <span class="hljs-keyword">init</span><br></code></pre></td></tr></table></figure>
-
-<p>初始化成功后会生成一堆文件</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902164014663.png" srcset="/img/loading.gif" lazyload alt="image-20230902164014663"></p>
-</li>
-</ol>
-<h2 id="3-部署到gitee"><a href="#3-部署到gitee" class="headerlink" title="3. 部署到gitee"></a>3. 部署到gitee</h2><ol>
-<li><p>打开 _config.yml 文件，找到最下面的deploy，进行如下设置：</p>
-<p>冒号后一定要有空格！！！这是yml语法规定的</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repository:</span> <span class="hljs-string">git@gitee.com:wu_hua_rou/wu_hua_rou.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">master</span><br></code></pre></td></tr></table></figure>
-
-<p>其中repository后设置的是gitee仓库的SSH地址，可以在博客的代码页面获取</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902164524585.png" srcset="/img/loading.gif" lazyload alt="image-20230902164524585"></p>
-</li>
-<li><p>在仓库首页点击 服务–&gt;Gitee Pages，进行实名认证（需要上传手持身份证照片，还需要等好几天，非常麻烦）</p>
-<p>实名认证成功后就会出现博客地址</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902165021546.png" srcset="/img/loading.gif" lazyload alt="image-20230902165021546"></p>
-</li>
-<li><p>勾选强制使用HTTPS，点击启动 或 更新，打开网址即可看到初始的hexo博客界面，类似下图：</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902174237139.png" srcset="/img/loading.gif" lazyload alt="image-20230902174237139"></p>
-</li>
-</ol>
-<h1 id="三-更换主题（Fluid）"><a href="#三-更换主题（Fluid）" class="headerlink" title="三.更换主题（Fluid）"></a>三.更换主题（Fluid）</h1><p>hexo官方主题网站：<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></p>
-<p>这里使用的是比较火的简约主题Fluid：<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/">https://hexo.fluid-dev.com/docs/</a></p>
-<h2 id="1-获取最新版本"><a href="#1-获取最新版本" class="headerlink" title="1.获取最新版本"></a>1.获取最新版本</h2><p>获取最新的release版本：<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/releases">https://github.com/fluid-dev/hexo-theme-fluid/releases</a></p>
-<p>下载，解压到 themes 目录，并将解压出的文件夹重命名为：fluid</p>
-<p><img src="/2023/09/02/hexo+gitee/image-20230902183816716.png" srcset="/img/loading.gif" lazyload alt="image-20230902183816716"></p>
-<h2 id="2-修改设置"><a href="#2-修改设置" class="headerlink" title="2. 修改设置"></a>2. 修改设置</h2><p>在根目录下的_config.yml，做以下两个修改（别忘了冒号后有空格）：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs yml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span>  <br><br><span class="hljs-attr">language:</span> <span class="hljs-string">zh-CN</span>  <br></code></pre></td></tr></table></figure>
-
-<h2 id="3-创建“关于”页"><a href="#3-创建“关于”页" class="headerlink" title="3. 创建“关于”页"></a>3. 创建“关于”页</h2><p>Fluid主题中的“关于”页面是需要单独创建的</p>
-<p><img src="/2023/09/02/hexo+gitee/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE2023-09-02-184144.jpg" srcset="/img/loading.gif" lazyload></p>
+                <h1 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h1><h2 id="Git工作流程"><a href="#Git工作流程" class="headerlink" title="Git工作流程"></a>Git工作流程</h2><p><img src="/2023/10/19/Git%E7%9A%84%E4%BD%BF%E7%94%A8/image-20231018223048766.png" srcset="/img/loading.gif" lazyload alt="image-20231018223048766"></p>
+<p>命令如下：</p>
 <ol>
-<li><p>在根目录下打开cmd，输入：</p>
-<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">hexo <span class="hljs-keyword">new</span> <span class="hljs-type">page</span> about<br></code></pre></td></tr></table></figure>
+<li><p><strong>clone（克隆）</strong>: 从远程仓库中把代码<strong>克隆</strong>到本地仓库 </p>
 </li>
-<li><p>修改 &#x2F;source&#x2F;about&#x2F;index.md，添加 layout 属性，如下：</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 标题<br><span class="hljs-section">layout: about</span><br><span class="hljs-section">---</span><br><br>这里写关于页的正文，支持 Markdown, HTML<br></code></pre></td></tr></table></figure></li>
+<li><p><strong>checkout （检出）</strong>:从本地仓库中<strong>检出</strong>一个仓库分支然后进行修订</p>
+</li>
+<li><p><strong>add（添加）</strong>: 在提交到本地仓库之前，先将代码<strong>添加</strong>到暂存区</p>
+</li>
+<li><p><strong>commit（提交）</strong>: <strong>提交</strong>到本地仓库</p>
+<p>​								本地仓库中保存了修改的各个历史版本 </p>
+</li>
+<li><p><strong>fetch (抓取)</strong> ： 从远程仓库，<strong>抓取</strong>到本地仓库，不进行任何的合并动作，一般操作比较少</p>
+</li>
+<li><p><strong>pull (拉取)</strong> ： 从远程仓库<strong>拉取</strong>到本地仓库，自动进行合并(merge)，然后放到到工作区，相当于 fetch+merge</p>
+</li>
+<li><p><strong>push（推送）</strong> : 修改完成后，需要和团队成员共享代码时，将代码<strong>推送</strong>到远程仓库</p>
+</li>
 </ol>
-<p>博客图片怎么显示？</p>
-<h1 id="四-发布文章"><a href="#四-发布文章" class="headerlink" title="四.发布文章"></a>四.发布文章</h1><h2 id="1-写文章"><a href="#1-写文章" class="headerlink" title="1.写文章"></a>1.写文章</h2><p>在博客根目录下 source\_posts 下写markdown类型文章</p>
-<p>文档最上方按如下格式书写</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">博客标题</span><br><span class="hljs-attr">date:</span> <span class="hljs-string">创建日期（格式：</span> <span class="hljs-number">2023</span><span class="hljs-string">/9/02</span> <span class="hljs-number">20</span><span class="hljs-string">:46:25）</span><br><span class="hljs-attr">updated:</span> <span class="hljs-string">修改日期</span><br><span class="hljs-attr">comments:</span> <span class="hljs-literal">true</span><span class="hljs-string">（开启评论），false（关闭评论）</span><br><span class="hljs-attr">categories:</span> <span class="hljs-string">文章所属分类</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
+<h2 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h2><h3 id="为命令配置别名"><a href="#为命令配置别名" class="headerlink" title="为命令配置别名"></a>为命令配置别名</h3><p>这是一个起别名的操作，主要是后续有的指令很多参数，很长</p>
+<p>不如提前设置好，起一个别名，这样来的方便</p>
+<ol>
+<li><p>打开gitBash,执行 touch ~&#x2F;.bashrc</p>
+</li>
+<li><p>在 .bashrc 文件中输入如下内容：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmd">#用于输出git提交日志<br>alias git-log=&#x27;git log --pretty=oneline --all --graph --abbrev-commit&#x27;<br>#用于输出当前目录所有文件及基本信息<br>alias ll=&#x27;ls -al&#x27;<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="获取本地仓库"><a href="#获取本地仓库" class="headerlink" title="获取本地仓库"></a>获取本地仓库</h3><p>要使用Git对我们的代码进行版本控制，首先需要获得本地仓库 </p>
+<ol>
+<li>在电脑的任意位置创建一个空目录（例如test）作为我们的本地Git仓库</li>
+<li>进入这个目录中，点击右键打开Git bash窗口 </li>
+<li>执行命令git init </li>
+<li>如果创建成功后可在文件夹下看到隐藏的.git目录。</li>
+</ol>
+<h3 id="基础操作指令"><a href="#基础操作指令" class="headerlink" title="基础操作指令"></a>基础操作指令</h3><p>Git工作目录下对于文件的修改(增加、删除、更新)会存在几个状态，这些修改的状态会随着我们执行Git 的命令而发生变化。</p>
+<p><img src="/2023/10/19/Git%E7%9A%84%E4%BD%BF%E7%94%A8/image-20231018224442467.png" srcset="/img/loading.gif" lazyload alt="image-20231018224442467"></p>
+<ul>
+<li>git add （工作区 –&gt; 暂存区）</li>
+<li>git commit （暂存区 –&gt; 本地仓库）</li>
+</ul>
+<h4 id="查看修改的状态（status）"><a href="#查看修改的状态（status）" class="headerlink" title="查看修改的状态（status）"></a>查看修改的状态（status）</h4><p>可以查看暂存区、工作区修改的状态</p>
+<ul>
+<li>git status</li>
+</ul>
+<h4 id="添加工作区到暂存区（add）"><a href="#添加工作区到暂存区（add）" class="headerlink" title="添加工作区到暂存区（add）"></a>添加工作区到暂存区（add）</h4><p>添加工作区一个或多个文件的修改到暂存区</p>
+<ul>
+<li>git add 单个文件名|通配符</li>
+<li>git add. （将所有修改都add到暂存区）</li>
+</ul>
+<h4 id="提交暂存区到本地仓库（commit）"><a href="#提交暂存区到本地仓库（commit）" class="headerlink" title="提交暂存区到本地仓库（commit）"></a>提交暂存区到本地仓库（commit）</h4><p>提交暂存区内容到本地仓库的当前分支</p>
+<ul>
+<li>git commit -m ‘注释内容’</li>
+</ul>
+<h4 id="查看提交日志（log）"><a href="#查看提交日志（log）" class="headerlink" title="查看提交日志（log）"></a>查看提交日志（log）</h4><ul>
+<li><p>git log [option]</p>
+<ul>
+<li>option<ul>
+<li>–all ：显示所有分支</li>
+<li>–pretty&#x3D;oneline ：将提交信息显示为一行</li>
+<li>–abbrev-commit ：使得输出的commitId更短</li>
+<li>–graph ：以图的形式显示</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>git-log</p>
+<ul>
+<li><p>这是前面设置的长命令的别名</p>
+</li>
+<li><p>完整命令如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">git log --pretty=oneline --all --graph --abbrev-commit<br></code></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h4 id="版本回退"><a href="#版本回退" class="headerlink" title="版本回退"></a>版本回退</h4><ul>
+<li>作用：版本切换</li>
+<li>git reset –hard commitID<ul>
+<li>commitID 可以使用 git-log 或 git log 指令查看</li>
+</ul>
+</li>
+<li>如何查看已经删除的记录？<ul>
+<li>git reflog</li>
+<li>这个指令可以看到已经删除的提交记录</li>
+</ul>
+</li>
+</ul>
+<h4 id="添加文件到忽略列表"><a href="#添加文件到忽略列表" class="headerlink" title="添加文件到忽略列表"></a>添加文件到忽略列表</h4><p>有些文件无需纳入Git 的管理，通常都是些自动生成的文件，比如：日志文件、编译过程中创建的临时文件… </p>
+<p>可以设置让它们<strong>不出现在未跟踪文件列表</strong>。</p>
+<p>方法：在工作目录中创建一个名为 .gitignore 的文件（文件名称固定），列出要忽略的文件模式。下面是一个示例：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># no .a files</span><br>*<span class="hljs-string">.a</span><br><span class="hljs-comment"># but do track lib.a, even though you&#x27;re ignoring .a files above</span><br>!lib.a<br><span class="hljs-comment"># only ignore the TODO file in the current directory, not subdir/TODO</span><br><span class="hljs-string">/TODO</span><br><span class="hljs-comment"># ignore all files in the build/ directory</span><br>build/<br><span class="hljs-comment"># ignore doc/notes.txt, but not doc/server/arch.txt</span><br>doc/*<span class="hljs-string">.txt</span><br><span class="hljs-comment"># ignore all .pdf files in the doc/ directory</span><br>doc/**/*<span class="hljs-string">.pdf</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="2-发布文章"><a href="#2-发布文章" class="headerlink" title="2.发布文章"></a>2.发布文章</h2><p>在博客根目录下打开cmd，输入如下命令:</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">hexo clean&amp;hexo g&amp;hexo s<br></code></pre></td></tr></table></figure>
-
-<p>此后访问 <a target="_blank" rel="noopener" href="http://localhost:4000/%EF%BC%8C%E5%8D%B3%E5%8F%AF%E7%9C%8B%E5%88%B0%E6%9B%B4%E6%96%B0%E5%90%8E%E7%9A%84%E5%8D%9A%E5%AE%A2">http://localhost:4000/，即可看到更新后的博客</a></p>
-<p>在cmd中输入ctrl+c即可关闭</p>
-<p>此后输入如下命令，即可将最新内容推送至远程仓库，从而更新博客 </p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">hexo d<br></code></pre></td></tr></table></figure>
 
 
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h3><p>使用分支意味着<strong>你可以把你的工作从开发主线上分离开来</strong>，进行重大的Bug修改、开发新的功能，而不影响开发主线。</p>
+<h4 id="查看本地分支"><a href="#查看本地分支" class="headerlink" title="查看本地分支"></a>查看本地分支</h4><ul>
+<li>git branch</li>
+</ul>
+<h4 id="创建本地分支"><a href="#创建本地分支" class="headerlink" title="创建本地分支"></a>创建本地分支</h4><ul>
+<li>git branch 分支名</li>
+</ul>
+<h4 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h4><ul>
+<li>切换到已经存在的分支<ul>
+<li>git checkout 分支名</li>
+</ul>
+</li>
+<li>直接创建并切换到一个不存在的分支（创建并切换）<ul>
+<li>git checkout -b 分支名</li>
+</ul>
+</li>
+</ul>
+<h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><p>一个分支上的提交可以合并到另一个分支</p>
+<ul>
+<li>git merge 分支名称</li>
+</ul>
+<h4 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h4><p>注意：不能删除当前分支，只能删除其他分支！！！</p>
+<ul>
+<li>删除分支时，需要做各种检查 <ul>
+<li>git branch -d b1</li>
+</ul>
+</li>
+<li>不做任何检查，强制删除<ul>
+<li>git branch -D b1</li>
+</ul>
+</li>
+</ul>
+<h4 id="解决冲突"><a href="#解决冲突" class="headerlink" title="解决冲突"></a>解决冲突</h4><p>当两个分支上对文件的修改可能会存在冲突，例如同时修改了同一个文件的同一行，这时就需要手动解 决冲突，解决冲突步骤如下： </p>
+<ol>
+<li><p>处理文件中冲突的地方 </p>
+</li>
+<li><p>将解决完冲突的文件加入暂存区(add) </p>
+</li>
+<li><p>提交到仓库(commit) 冲突部分的内容处理如下所示：</p>
+</li>
+</ol>
+<h4 id="开发中分支使用原则与流程"><a href="#开发中分支使用原则与流程" class="headerlink" title="开发中分支使用原则与流程"></a>开发中分支使用原则与流程</h4><p>几乎所有的版本控制系统都以某种形式支持分支。 使用分支意味着你可以把你的工作从开发主线上分离 开来进行重大的Bug修改、开发新的功能，以免影响开发主线。 在开发中，一般有如下分支使用原则与流程： </p>
+<ul>
+<li><p>master （生产） 分支</p>
+<p> 线上分支，主分支，中小规模项目作为线上运行的应用对应的分支；</p>
+</li>
+<li><p>develop（开发）分支</p>
+</li>
+</ul>
+<p>  是从master创建的分支，一般作为开发部门的主要开发分支，如果没有其他并行开发不同期上线 要求，都可以在此版本进行开发，阶段开发完成后，需要是合并到master分支,准备上线。 </p>
+<ul>
+<li><p>feature&#x2F;xxxx分支 </p>
+<p>从develop创建的分支，一般是同期并行开发，但不同期上线时创建的分支，分支上的研发任务完 成后合并到develop分支。 </p>
+</li>
+<li><p>hotfix&#x2F;xxxx分支</p>
+<p>从master派生的分支，一般作为线上bug修复使用，修复完成后需要合并到master、test、 develop分支。</p>
+</li>
+<li><p>还有一些其他分支，在此不再详述，例如test分支（用于代码测试）、pre分支（预上线分支）等 等。</p>
+</li>
+</ul>
+<h2 id="Git远程仓库"><a href="#Git远程仓库" class="headerlink" title="Git远程仓库"></a>Git远程仓库</h2>
                 
               </div>
             
@@ -515,8 +548,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>hexo+gitee搭建个人博客（详细）</div>
-      <div>https://wu_hua_rou.gitee.io/2023/09/02/hexo+gitee/</div>
+      <div>Git的使用</div>
+      <div>https://wu_hua_rou.gitee.io/2023/10/19/Git的使用/</div>
     </div>
     <div class="license-meta">
       
@@ -528,13 +561,13 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年9月2日</div>
+          <div>2023年10月19日</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年9月16日</div>
+          <div>2023年11月10日</div>
         </div>
       
       
@@ -565,15 +598,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/09/16/%E9%85%92%E6%A1%8C%E7%A4%BC%E4%BB%AA/" title="酒桌礼仪">
+                      <a href="/2023/11/10/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Spring学习笔记">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">酒桌礼仪</span>
+                        <span class="hidden-mobile">Spring学习笔记</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/10/05/Java%E5%8F%8D%E5%B0%84%E4%B8%8E%E6%B3%A8%E8%A7%A3/" title="Java反射、注解、动态代理">
+                        <span class="hidden-mobile">Java反射、注解、动态代理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
